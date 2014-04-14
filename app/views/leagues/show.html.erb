@@ -64,17 +64,19 @@
 
 	  <tbody>
 	    <% @game_events.each do |game_event| %>
-	      <tr>
-	        <td><%= link_to game_event.home_team.name, game_event.home_team %></td>
-	        <td><%= link_to game_event.away_team.name, game_event.away_team %></td>
-	        <td><%= game_event.start_date %></td>
-	        <td><%= game_event.location %></td>
-	        <td><%= game_event.home_score %></td>
-	        <td><%= game_event.away_score %></td>
-	        <td><%= link_to 'Show', game_event %></td>
-	        <td><%= link_to 'Edit', edit_game_event_path(game_event) %></td>
-	        <td><%= link_to 'Destroy', game_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	      </tr>
+   			 <% if game_event.league_id == @league.id %>
+				 <tr>
+			        <td><%= link_to game_event.home_team.name, game_event.home_team %></td>
+			        <td><%= link_to game_event.away_team.name, game_event.away_team %></td>
+			        <td><%= game_event.start_date %></td>
+			        <td><%= game_event.location %></td>
+			        <td><%= game_event.home_score %></td>
+			        <td><%= game_event.away_score %></td>
+			        <td><%= link_to 'Show', game_event %></td>
+			        <td><%= link_to 'Edit', edit_game_event_path(game_event) %></td>
+			        <td><%= link_to 'Destroy', game_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			      </tr>
+			<% end %>
 	    <% end %>
 	  </tbody>
 	</table>

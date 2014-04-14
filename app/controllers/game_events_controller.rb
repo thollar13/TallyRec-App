@@ -15,10 +15,12 @@ class GameEventsController < ApplicationController
   # GET /game_events/new
   def new
     @game_event = GameEvent.new
+    @leagues = League.all
   end
 
   # GET /game_events/1/edit
   def edit
+    @leagues = League.all
   end
 
   # POST /game_events
@@ -71,7 +73,7 @@ class GameEventsController < ApplicationController
     def game_event_params
       params.require(:game_event).permit(
         :title, :start_date, :end_date, :location,
-        :home_team_id, :away_team_id, :home_score, :away_score
+        :home_team_id, :away_team_id, :home_score, :away_score, :league_id
       )
     end
 end
