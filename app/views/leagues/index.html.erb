@@ -1,0 +1,36 @@
+<header>
+  <h1 style="text-align: center;">Leagues</h1>
+</header>
+<div class="body-wrap league-index">
+  <div class="back-btn edit-btn">
+      <%= link_to 'New League', new_league_path %>
+  </div>
+  <div class="special-top black-bg">
+    <table>
+        <tr>
+          <th>Name</th>
+          <th>Sport</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th><th>
+        </tr>
+    </table>
+  </div>
+    <table class='league-schedule'>
+        <% @leagues.each do |league| %>
+          <tr>
+            <td><%= league.name %></td>
+            <td><%= league.sport %></td>
+            <td><%= league.start_date %></td>
+            <td><%= league.end_date %></td>
+            <td>
+              <div class="view-league-btn">
+                <%= link_to 'View League', league %>
+              </div>
+            </td>
+            <!-- <td><%= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+          </tr>
+        <% end %>
+    </table>
+  </table>
+</div>

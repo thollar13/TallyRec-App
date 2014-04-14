@@ -1,0 +1,127 @@
+<p id="notice"><%= notice %></p>
+<a href="javascript:window.print()" style="float: right;">Print Schedule</a>
+<h2>Team Info</h2>
+<table>
+	<tr>
+		<td><strong>Name:</strong></td>
+		<td><%= @team.name %></td>
+		<td><strong>Primary Color:</strong></td>
+		<td><%= @team.primary_color %></td>
+		<!-- <td><strong>Wins:</td>
+		<td><%= $win %></td> -->
+	</tr>
+	<tr>
+		<td><strong>Nickname:</strong></td>
+		<td><%= @team.mascot %></td>
+		<td><strong>Secondary Color:</strong></td>
+		<td><%= @team.secondary_color %></td>
+		<!-- <td><strong>Losses:<strong></td>
+		<td><%= $loss %></td> -->
+	</tr>
+	<tr>
+		<td><%= link_to 'Edit', edit_team_path(@team) %></td>
+	</tr>
+</table>
+
+<h2>League</h2>
+<%  @leagues.each do |league|  %>
+	<%= link_to league.name, league %>
+<% end %>
+
+<h2>Schedule</h2>
+<table class="schedule">
+	<thead>
+		<tr>
+			<th>Opponent</th>
+			<th>Location</th>
+			<th>Date</th>
+			<th><%= @team.name %></th>
+			<th>Opponent</th>
+			<th>Result</th>
+			<th>Record</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% 
+		$win = 0
+		$loss = 0
+		$tie = 0
+		%>
+	<% @team.games.each do |game| %>
+		<tr class="<%= 'home' if @team.id == game.home_team_id %>">
+			<% if @team.id == game.home_team_id %>
+				<td><%= link_to game.away_team.name, game.away_team %></td>
+			<% else %>
+				<td>@<%= link_to game.home_team.name, game.home_team %></td>
+			<% end %>
+			<td><%= game.location %></td>
+			<td><%= game.start_date %></td>
+			<td>
+				<% if game.home_team_id == @team.id %>
+					<%= game.home_score %>
+				<% else %>
+					<%= game.away_score %>
+				<% end %>
+			</td>
+			<td>
+				<% if game.away_team_id == @team.id %>
+					<%= game.home_score %>
+				<% else %>
+					<%= game.away_score %>
+				<% end %>
+			</td>
+			<% if @team.id == game.home_team_id %>
+				<% if game.home_score > game.away_score %>
+				<% $win += 1 %>
+					<td>Win</td>
+				<% elsif game.home_score == game.away_score %>
+					<td></td>
+				<% else %>
+				<% $loss += 1 %>
+					<td>Loss</td>
+				<% end %>
+					<td>
+						(<%= $win %> - <%= $loss %>)
+					</td>
+			<% elsif @team.id == game.away_team_id%>
+				<% if game.home_score < game.away_score %>
+				<% $win += 1 %>
+					<td>Win</td>
+				<% elsif game.home_score == game.away_score %>
+					<td></td>
+				<% else %>
+				<% $loss += 1 %>
+					<td>Loss</td>
+				<% end %>
+					<td>
+						(<%= $win %> - <%= $loss %>)
+					</td>
+			<% end %>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="4">
+			</td>
+			<td colspan="2">
+				<strong>Overall Record:</strong>
+			</td>
+			<td colspan="1">
+				(<%= $win %> - <%= $loss %>)
+			</td>
+		<tr>
+			<td colspan="3">
+				<%= link_to 'Back', teams_path %>
+			</td>
+			<td colspan="4" style="text-align: right;">
+				<div class="new-game-link">
+					<%= link_to 'Add New Game', new_game_event_path %>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<!-- 
+	<%= "No games found yet." if @home_games.empty? %>
+	<%= "No games found yet." if @away_games.empty? %>
+-->

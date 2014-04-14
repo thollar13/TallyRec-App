@@ -1,0 +1,52 @@
+<header>
+  <h1>New League</h1>
+</header>
+
+<div class="body-wrap league-edit">
+<%= form_for(@league) do |f| %>
+  <% if @league.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@league.errors.count, "error") %> prohibited this league from being saved:</h2>
+
+      <ul>
+      <% @league.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="back-btn edit-btn edit-submit">
+    <%= f.submit %>
+  </div>
+  <table>
+    <tr>
+      <td>
+        <%= f.label :name %>
+      </td>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+      <td>
+        <%= f.label :sport %>
+      </td>
+      <td>
+        <%= f.text_field :sport %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :start_date %>
+      </td>
+      <td>
+        <%= f.text_field :start_date %>
+      </td>
+      <td>
+        <%= f.label :end_date %>
+      </td>
+      <td>
+        <%= f.text_field :end_date %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+</div>

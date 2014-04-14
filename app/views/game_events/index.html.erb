@@ -1,0 +1,38 @@
+<section id="new-game">
+<h1>2014 NCAA Schedule</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Home</th>
+      <th>Away</th>
+      <th>Game Time</th>
+      <th>Location</th>
+      <th>Home Score</th>
+      <th>Away Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_events.each do |game_event| %>
+      <tr>
+        <td><%= link_to game_event.home_team.name, game_event.home_team %></td>
+        <td><%= link_to game_event.away_team.name, game_event.away_team %></td>
+        <td><%= game_event.start_date %></td>
+        <td><%= game_event.location %></td>
+        <td><%= game_event.home_score %></td>
+        <td><%= game_event.away_score %></td>
+        <td><%= link_to 'Show', game_event %></td>
+        <td><%= link_to 'Edit', edit_game_event_path(game_event) %></td>
+        <td><%= link_to 'Destroy', game_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<a href="javascript:window.print()">Print Schedule</a>
+<br>
+
+<div class="new-game-link"><%= link_to 'Add New Game', new_game_event_path %></div>
+</div>
+</section>

@@ -1,0 +1,26 @@
+<header>
+	<h1><%= @league.name %></h1>
+	<h4><%= @league.sport %></h4>
+</header>
+
+<div class="body-wrap league-edit">
+	<div class="back-btn">
+		<%= link_to 'Back', @league %>
+		<br>
+	</div>
+	<div class="left-half">
+		<h3 class="inline-me">Edit League Information</h3>
+		<%= render 'form' %>
+	</div>
+	<div class="right-half">
+		<h3 class="inline-me">Teams in League</h3>
+		<div class="view-league-btn">
+			<%= link_to 'Add Team', new_team_path %>
+		</div>
+		<div class="clearfix"></div>
+		<% @team.each do |team| %>
+			<p style="width: 45%; float: left;"><%= team.name %></p>
+		<% end %>
+	</div>
+</div>
+

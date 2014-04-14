@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+<a href="javascript:window.print()">Print Schedule</a>
+
+<header>
+	<h1 style="text-align: center;"><%= @league.name %></h1>
+	<h4 style="text-align: center;"><%= @league.sport %></h4>
+</header>
+<div class="body-wrap">
+	<div class="back-btn">
+		<%= link_to 'Back', leagues_path %>
+	</div>
+	<div class="back-btn edit-btn">
+		<%= link_to 'Edit League Info', edit_league_path(@league) %>
+	</div>
+
+	<div class="back-btn edit-btn left-first-btn">
+		League Standings
+	</div>
+
+	<div class="back-btn edit-btn left-second-btn">
+		Button Two
+	</div>
+
+	<div class="special-top black-bg border-box">
+		<div class="one-third-width">
+		  <strong>Name:</strong> <%= @league.name %>
+		  	<br>
+		  <strong>Sport:</strong> <%= @league.sport %>
+		</div>
+		<div class="one-third-width border-box">
+		 <strong>Start Date:</strong>
+		  <%= @league.start_date %>
+		  	<br>
+		  <strong>End Date:</strong>
+		  <%= @league.end_date %>
+		</div>
+		<div class="one-third-width border-box">
+			<strong>Teams:</strong>
+
+			
+			<% @team.each do |team| %>
+				<% if team.league_id == @league.id %>
+					<%= link_to team.name, team %> 
+					, 
+				<% end %>	
+			<% end %>
+
+		</div>
+	</div>
+
+	<section id="new-game">
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Home</th>
+	      <th>Away</th>
+	      <th>Game Time</th>
+	      <th>Location</th>
+	      <th>Home Score</th>
+	      <th>Away Score</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @game_events.each do |game_event| %>
+	      <tr>
+	        <td><%= link_to game_event.home_team.name, game_event.home_team %></td>
+	        <td><%= link_to game_event.away_team.name, game_event.away_team %></td>
+	        <td><%= game_event.start_date %></td>
+	        <td><%= game_event.location %></td>
+	        <td><%= game_event.home_score %></td>
+	        <td><%= game_event.away_score %></td>
+	        <td><%= link_to 'Show', game_event %></td>
+	        <td><%= link_to 'Edit', edit_game_event_path(game_event) %></td>
+	        <td><%= link_to 'Destroy', game_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<br>
+
+	<div class="new-game-link"><%= link_to 'Add New Game', new_game_event_path %></div>
+	</div>
+	</section>
+</div>

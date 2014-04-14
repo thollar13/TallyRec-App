@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @game_event.title %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @game_event.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @game_event.end_date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @game_event.location %>
+</p>
+
+<p>
+  <strong>Home team:</strong>
+  <%= @game_event.home_team.name %>
+</p>
+
+<p>
+  <strong>Away team:</strong>
+  <%= @game_event.away_team.name %>
+</p>
+<p>
+  <strong>Home Score</strong>
+  <%= @game_event.home_score %>
+</p>
+<p>
+  <strong>Away Score</strong>
+  <%= @game_event.away_score %>
+</p>
+
+<%= link_to 'Edit', edit_game_event_path(@game_event) %> |
+<%= link_to 'Back', game_events_path %>
